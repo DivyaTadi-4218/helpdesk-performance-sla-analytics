@@ -211,10 +211,11 @@ tickets = pd.DataFrame(tickets_list)
 # ─────────────────────────────────────────
 # 5. EXPORT
 # ─────────────────────────────────────────
-tickets.to_csv('/mnt/user-data/outputs/tickets.csv',        index=False)
-agents.to_csv('/mnt/user-data/outputs/agents.csv',          index=False)
-departments.to_csv('/mnt/user-data/outputs/departments.csv',index=False)
-sla_policy.to_csv('/mnt/user-data/outputs/sla_policy.csv',  index=False)
+tickets.to_csv('generated_data/tickets.csv', index=False)
+agents.to_csv('generated_data/agents.csv', index=False)
+departments.to_csv('generated_data/departments.csv', index=False)
+sla_policy.to_csv('generated_data/sla_policy.csv', index=False)
+
 
 print("=" * 50)
 print("DATASET GENERATION COMPLETE")
