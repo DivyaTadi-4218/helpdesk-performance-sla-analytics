@@ -164,8 +164,8 @@ The Python script in `Python/generate_dataset.py` generates the helpdesk dataset
 **Tools:** SQL Server · Power BI · DAX · Python · Pandas · NumPy  
 **Domain:** IT Operations · Helpdesk Analytics · SLA Management
 
-- GitHub: [Add your repository URL here]
-- LinkedIn: [Add your LinkedIn profile URL here]
+- GitHub: [https://github.com/DivyaTadi-4218]
+- LinkedIn: [https://www.linkedin.com/in/divya-tadi-b1b453259/]
 
 ## Acknowledgement
 
