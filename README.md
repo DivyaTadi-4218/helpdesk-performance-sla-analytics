@@ -169,5 +169,8 @@ The Python script in `Python/generate_dataset.py` generates the helpdesk dataset
 
 ## Acknowledgement
 
-This repository is based on an existing project structure and has been modified for learning and portfolio purposes. Please retain appropriate credit to the original repository and comply with its licence. Add the original repository link here before publishing if required.
+This project was completed independently as part of my data analytics learning and portfolio development.
 
+Through this project, I explored helpdesk ticket data, analysed SLA performance using SQL Server, worked with Python for dataset preparation, and developed a Power BI dashboard to present key metrics and business insights.
+
+This independent project helped me strengthen my technical skills, analytical thinking, problem-solving abilities, and understanding of real-world business analytics workflows.
