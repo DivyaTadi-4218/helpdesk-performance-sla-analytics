@@ -1,176 +1,305 @@
 # Helpdesk Performance & SLA Analytics
 
-**End-to-end IT support operations analytics using SQL Server, Power BI, and Python**
+**End-to-end IT support operations dashboard built with SQL Server, Power BI, and Python**
+## 🔗 Live Dashboard
 
-**Created by: Divya Tadi**
+**[View Interactive Dashboard →](https://app.powerbi.com/view?r=eyJrIjoiMmZlNDc3M2MtNWYzNi00ZjZhLThiMzctYzgyNzIxMDlkNmIwIiwidCI6IjgxNzlhMDY3LTM5NGYtNDI2ZS05M2RhLTMzZmM4MjJmYTgxNSJ9)**
 
-## Project Overview
+*Published via Power BI Service — no login required, fully interactive*
 
-This project analyses IT helpdesk ticket data to understand ticket volume, Service Level Agreement (SLA) compliance, resolution times, agent workload, and department-wise support demand. The goal is to help IT teams identify recurring bottlenecks and make data-informed staffing and process decisions.
+![Dashboard Preview](Screenshots/Executive%20Overview.png)
 
-> **Note:** This is a portfolio project using a generated/simulated helpdesk dataset. The findings describe this dataset and should not be interpreted as results from a real company.
+---
 
 ## Business Problem
 
-IT support teams handle hardware failures, software issues, access requests, and network problems. Without structured analysis, managers may struggle to identify:
+Large IT companies receive hundreds of support tickets daily across departments — hardware failures, software issues, access requests, network problems. Without structured analysis, IT managers have no visibility into:
 
-- Which ticket categories and priorities have higher SLA breach rates
-- Which agents may be overloaded
-- How resolution time varies by ticket type
-- When ticket demand is highest
-- Which departments contribute most to ticket volume and backlog
-- How reopened tickets affect support quality
+- Which ticket categories are breaching SLA deadlines repeatedly
+- Which agents are overloaded vs underutilised
+- Whether high-priority tickets are actually being resolved faster than low-priority ones
+- What time of day and week sees the highest ticket load
+- Which departments generate the most unresolved tickets
+- Whether SLA compliance is improving or stagnating over time
 
-## Project Objectives
+The result is reactive IT support instead of proactive — problems keep recurring, SLAs get missed, and leadership has no data to make staffing or process decisions.
 
-- Store and analyse helpdesk data using SQL Server.
-- Clean and validate imported data.
-- Calculate response and resolution metrics against SLA policies.
-- Build an interactive Power BI dashboard for operational insights.
-- Use Python to generate and prepare the dataset.
+---
+
+## Solution
+
+An end-to-end analytics dashboard that gives IT managers a single view of support operations — tracking ticket volumes, SLA compliance, agent performance, and department-wise burden across 26 months of data (January 2024 – February 2026).
+
+**Key insights the dashboard surfaces:**
+- SLA breach rate by category and priority
+- Average resolution time by agent and ticket type
+- Peak ticket submission periods (day/week/month)
+- Departments with highest unresolved ticket backlog
+- First-call resolution rate trends
+- Agent workload vs breach rate correlation
+
+---
 
 ## Tech Stack
 
 | Tool | Purpose |
-|---|---|
-| Python, Pandas, NumPy | Dataset generation and data preparation |
-| SQL Server | Data storage, cleaning, transformations, analytical queries and views |
-| Power BI | Interactive dashboard and visual analysis |
-| DAX | Measures and KPI calculations |
-| GitHub | Project version control and documentation |
+|------|---------|
+| Python (Pandas, NumPy) | Exploratory Data Analysis |
+| SQL Server | Data storage, cleaning, transformation, analytical views |
+| Power BI (DAX) | Interactive 3-page dashboard |
+
+---
 
 ## Dataset
 
-The project contains four main tables:
+Dataset built to mirror real IT helpdesk operations at a mid-large Indian IT company, with realistic data quality issues across all tables.
 
-| Table | Records | Description |
-|---|---:|---|
-| `tickets` | 8,000 | Helpdesk tickets and their status, category, priority and dates |
-| `agents` | 20 | Support agent details |
-| `departments` | 8 | Requesting departments |
-| `sla_policy` | 20 | SLA thresholds by category and priority |
+**4 tables — 8,000+ records:**
 
-The dataset is simulated for analytics practice. Ticket counts, SLA results, and other findings are specific to this dataset.
+| Table | Rows | Description |
+|-------|------|-------------|
+| tickets | 8,000 | Core fact table — one row per support ticket |
+| agents | 20 | Support agent details — L1/L2/L3 teams, shifts, locations |
+| departments | 8 | Requesting departments with headcount for normalisation |
+| sla_policy | 20 | SLA thresholds by category + priority combination |
+
+**Patterns present in the data:**
+- Monday and Friday have higher ticket volumes — post-weekend issues and pre-weekend rushes
+- Network and Hardware categories breach SLA at higher rates (35–37%) vs Access (13%)
+- 3 agents carry disproportionate workload — 973, 973, 928 tickets vs team average of 400
+- Q1 2025 ticket spike reflecting a system migration event
+- 23.49% overall SLA breach rate — realistic for a mid-size IT operation
+- 9.23% ticket reopen rate — indicating premature closure issues
+
+---
 
 ## Project Structure
 
-```text
+```
 Helpdesk-Performance-SLA-Analytics/
-├── Python/
-│   └── generate_dataset.py
-├── SQL/
-│   └── helpdesk_complete.sql
-├── PowerBI/
-│   └── Helpdesk_Performance_SLA_Analytics.pbix
-├── Screenshots/
-│   ├── Executive Overview.png
-│   ├── SLA & Resolution Deep Dive.png
-│   ├── Agent & Department Performance.png
-│   └── placeholder.txt
-├── generated_data/
+│
+├── Data/
 │   ├── tickets.csv
 │   ├── agents.csv
 │   ├── departments.csv
 │   └── sla_policy.csv
+│
+├── SQL/
+│   └── helpdesk_complete.sql
+│
+├── PowerBI/
+│   └── Helpdesk_Performance_SLA_Analytics.pbix
+│
+├── Screenshots/
+│   ├── Executive Overview.png
+│   ├── SLA & Resolution Deep Dive.png
+│   └── Agent & Department Performance.png
+│
 └── README.md
 ```
 
-*Folder and file names may vary slightly depending on the local project setup.*
+---
 
-## Power BI Dashboard
+## SQL Scripts
 
-The Power BI report is organised into three analysis pages.
+The SQL script (`helpdesk_complete.sql`) is structured in 3 sections and is the backbone of the entire project.
 
-### 1. Executive Overview
+**Script 01 — Schema Creation & Data Load**
+- CREATE TABLE scripts for all 4 tables with primary keys, foreign keys, and CHECK constraints
+- Referential integrity enforced at database level — not in Power BI
+- Verification queries confirming row counts and zero orphan records
 
-Provides a high-level snapshot of helpdesk operations, including total tickets, SLA breach rate, average resolution time, open backlog, first-call resolution, and critical tickets.
+**Script 02 — Data Cleaning & Type Correction**
+- Data type fixes — nvarchar → DATETIME using TRY_CONVERT (handles NULLs safely vs CONVERT)
+- agents.team column fix — wizard imported L1/L2/L3 as money type (1.00/2.00/3.00), corrected to VARCHAR
+- NULL analysis — distinguishing valid NULLs (open tickets have no resolved_date) from invalid ones
+- Whitespace trimming on all VARCHAR columns using LTRIM/RTRIM
+- Duplicate detection on ticket_id
+- Date logic validation — resolved_date must be after created_date
 
-![Executive Overview](Screenshots/Executive%20Overview.png)
+**Script 03 — Derived Columns & Analytical Queries**
+- `resolution_hours` — DATEDIFF in minutes divided by 60.0 for decimal precision (not DATEDIFF in hours which truncates)
+- `response_hours` — first response time calculation
+- `sla_breach_flag` — joined to sla_policy on category + priority to get specific threshold per ticket type
+- `response_breach_flag` — first response SLA violation flag
+- `day_of_week`, `hour_of_day`, `month_year`, `week_number` — time intelligence columns
+- 6 analytical queries: breach rates, agent rankings using RANK() window functions, department burden, peak hour heatmap, monthly trends, FCR rate
+- 3 Power BI views — `vw_tickets_full`, `vw_agent_summary`, `vw_dept_summary`
 
-### 2. SLA & Resolution Deep Dive
+---
 
-Explores SLA performance, resolution time by category, breach trends, and periods with higher ticket demand.
+## Dashboard — 3 Pages
 
-![SLA & Resolution Deep Dive](Screenshots/SLA%20%26%20Resolution%20Deep%20Dive.png)
+### Page 1 — Executive Overview
 
-### 3. Agent & Department Performance
+High-level health snapshot for IT leadership.
 
-Compares agent workloads and department-level ticket demand to help identify potential workload imbalances.
+![Page 1](Screenshots/Executive%20Overview.png)
 
-![Agent & Department Performance](Screenshots/Agent%20%26%20Department%20Performance.png)
+**KPI Cards:** Total Tickets · SLA Breach % · Avg Resolution Hrs · Open Backlog · FCR Rate % · Critical Tickets
 
-## Key Dashboard Metrics
+**Visuals:**
+- Monthly Ticket Volume & SLA Breach Trend — dual-axis line chart showing volume and breach rate together
+- Ticket Volume by Category — Network highlighted in red as highest breach category
+- SLA Compliance vs Breach — donut chart with three segments: Compliant / Breached / Open/Unresolved
+- Ticket Volume by Priority Over Time — stacked column across all 26 months
+- Slicers: Date Range · Department · Priority
+- Key Insights callout box
 
-The current report displays the following headline metrics. Results can change when filters or data are refreshed.
+---
 
-| Metric | Displayed value |
-|---|---:|
-| Total Tickets | 8,000 |
-| SLA Breach Rate | 23.49% |
-| Average Resolution Time | 29.3 hours |
-| Open Backlog | 1,177 |
-| First-Call Resolution (FCR) | 95.34% |
-| Critical Tickets | 603 |
+### Page 2 — SLA & Resolution Deep Dive
 
-## SQL Analysis
+Where and why SLAs are being breached.
 
-The SQL work covers:
+![Page 2](Screenshots/SLA%20%26%20Resolution%20Deep%20Dive.png)
 
-- Creating and validating the core tables.
-- Checking data types, null values, duplicate ticket IDs and date consistency.
-- Calculating response and resolution durations.
-- Comparing ticket performance with SLA thresholds by category and priority.
-- Analysing ticket volume, SLA breaches, agent performance, department demand and time-based patterns.
-- Preparing views for Power BI reporting.
+**KPI Cards:** SLA Breach Rate · Avg Resolution Hrs · Total Breached Tickets · Reopen Rate %
 
-**Important:** Run the SQL script section by section and review the database/table setup first. Do not rerun database-creation statements blindly if the database already exists.
+**Visuals:**
+- **Peak Hour Heatmap** — Matrix visual with conditional formatting gradient (dark navy → red) showing ticket load by Day × Hour. Monday 11am–1pm is peak. This directly answers staffing decisions.
+- Avg Resolution Time by Category — Other category takes longest at 44hrs despite lower volume
+- SLA Breach Rate by Category — Network 37.5% vs Access 13.1%
+- Monthly SLA Breach Rate Trend — line chart with average reference line showing no improvement trend
+- Top Agents by SLA Breach Rate — individual accountability view
+- Slicers: Category · Priority
 
-## Python Workflow
+---
 
-The Python script in `Python/generate_dataset.py` generates the helpdesk dataset and exports CSV files. Review the script and output folder before rerunning it, because generating the dataset again may replace existing CSV outputs.
+### Page 3 — Agent & Department Performance
 
-## How to Run the Project
+Staffing decisions — who needs support, who is overloaded.
 
-### 1. Prepare the data
+![Page 3](Screenshots/Agent%20%26%20Department%20Performance.png)
 
-1. Install Python and the required packages used by the generator script.
-2. Run `Python/generate_dataset.py` if you want to regenerate the simulated dataset.
-3. Confirm the CSV files are available in the generated data folder.
+**KPI Cards:** Total Tickets · Avg Tickets per Agent · Overall Breach Rate · Open Backlog
 
-### 2. Set up SQL Server
+**Visuals:**
+- Agent Performance Summary Table — conditional formatting on Breach % column (green to red gradient)
+- Ticket Volume by Agent — top 3 overloaded agents highlighted in red
+- Total Tickets by Department — Engineering leads at 1,791 tickets
+- Tickets per Employee by Dept — Marketing highest burden at 22.97 (highlighted)
+- **Agent Workload vs SLA Breach Rate** — scatter chart showing two dimensions simultaneously. Agents in the top-right quadrant have both high workload AND high breach rate — the clearest signal for staffing intervention.
+- Slicers: Team (L1/L2/L3) · Department
 
-1. Open SQL Server Management Studio (SSMS) and connect to your SQL Server instance.
-2. Create or select the `HelpdeskAnalytics` database.
-3. Import the CSV files in this order: `departments`, `agents`, `sla_policy`, then `tickets`.
-4. Review `SQL/helpdesk_complete.sql` and execute its sections in order, adapting any table or column definitions to match your imported schema.
+---
 
-### 3. Open Power BI
+## Key Findings
 
-1. Open `PowerBI/Helpdesk_Performance_SLA_Analytics.pbix`.
-2. If prompted, update the data source settings to point to your SQL Server instance.
-3. Refresh the data and check that the report visuals load correctly.
+| Finding | Value | Business Implication |
+|---------|-------|---------------------|
+| Overall SLA breach rate | 23.49% | Nearly 1 in 4 tickets misses SLA deadline |
+| Network category breach rate | 37.5% | Highest — needs dedicated network support staffing |
+| Access category breach rate | 13.1% | Lowest — process working well, can be a model |
+| SLA breach trend over 26 months | No improvement | Systemic staffing issue, not random variation |
+| Peak ticket window | Monday 11am–1pm | Schedule more agents on Monday morning shifts |
+| Agent overload — top 3 | 973, 973, 928 tickets | vs avg 400 — redistribution decision needed immediately |
+| Marketing dept burden | 22.97 tickets/employee | Highest ratio — potential IT training gap for Marketing staff |
+| Other category resolution | 44 hrs avg | Longest time despite lowest volume — skill gap for complex issues |
+| First Call Resolution rate | 95.34% | Strong — minimal ticket reopening overall |
+| Reopen rate | 9.23% | ~737 tickets reopened — agents closing prematurely |
+| Open backlog | 1,177 tickets | 14.7% of all tickets unresolved |
 
-## Key Takeaways
+---
 
-- SLA performance can be compared across ticket categories and priorities.
-- Workload comparisons can help flag agents or departments that may need further investigation.
-- Time-based analysis can help teams plan staffing around periods of higher demand.
-- Dashboard metrics should always be interpreted with their definitions, filters, and SLA calculation rules in mind.
+## DAX Measures
+
+Key measures built in Power BI (stored in single `Measures_` table):
+
+```dax
+-- SLA Breach Rate (text for KPI card display)
+SLA Breach Rate % =
+FORMAT(
+    DIVIDE(
+        SUMX(vw_tickets_full, IF(vw_tickets_full[sla_breach_flag] = TRUE(), 1, 0)),
+        CALCULATE(COUNTROWS(vw_tickets_full),
+            NOT(ISBLANK(vw_tickets_full[sla_breach_flag]))),
+        0
+    ) * 100, "0.00") & "%"
+
+-- FCR Rate
+FCR Rate % =
+FORMAT(
+    DIVIDE(
+        COUNTROWS(FILTER(vw_tickets_full,
+            vw_tickets_full[reopened_flag] = FALSE() &&
+            (vw_tickets_full[status] = "Resolved" ||
+             vw_tickets_full[status] = "Closed"))),
+        COUNTROWS(FILTER(vw_tickets_full,
+            vw_tickets_full[status] = "Resolved" ||
+            vw_tickets_full[status] = "Closed")),
+        0
+    ) * 100, "0.00") & "%"
+
+-- Open Backlog
+Open Backlog =
+COUNTROWS(FILTER(vw_tickets_full,
+    vw_tickets_full[status] = "Open" ||
+    vw_tickets_full[status] = "In Progress"))
+
+-- Breach Count
+Breach Count =
+SUMX(vw_tickets_full,
+    IF(vw_tickets_full[sla_breach_flag] = TRUE(), 1, 0))
+```
+
+---
+
+## SLA Policy Reference
+
+| Category | Priority | Response SLA | Resolution SLA |
+|----------|----------|-------------|----------------|
+| Network | Critical | 1 hr | 2 hrs |
+| Hardware | Critical | 1 hr | 4 hrs |
+| Software | Critical | 1 hr | 6 hrs |
+| Hardware | High | 2 hrs | 8 hrs |
+| Software | High | 2 hrs | 12 hrs |
+| Access | Medium | 4 hrs | 24 hrs |
+| Any | Low | 8 hrs | 72 hrs |
+
+---
+
+## How to Run
+
+**SQL setup:**
+1. Open SQL Server Management Studio
+2. Connect to your local instance
+3. Import CSVs from `Data/` folder using SSMS Import Flat File wizard (Tasks → Import Flat File)
+4. Import in order: departments → agents → sla_policy → tickets
+5. Run `SQL/helpdesk_complete.sql` section by section — not all at once
+6. Run the views section to create `vw_tickets_full`, `vw_agent_summary`, `vw_dept_summary`
+
+**Power BI:**
+1. Open `PowerBI/Helpdesk_Performance_SLA_Analytics.pbix`
+2. Home → Transform data → Data source settings → update to your local SQL Server instance
+3. Refresh data
+
+**Or view instantly without any setup:**  
+[Live Dashboard on Power BI Service](https://app.powerbi.com/view?r=eyJrIjoiMmZlNDc3M2MtNWYzNi00ZjZhLThiMzctYzgyNzIxMDlkNmIwIiwidCI6IjgxNzlhMDY3LTM5NGYtNDI2ZS05M2RhLTMzZmM4MjJmYTgxNSJ9)
+
+---
+
+## Why This Project
+
+Most fresher analytics portfolios use e-commerce or banking datasets from Kaggle. This project was deliberately designed to target Indian IT services companies (TCS, Infosys, Wipro, HCL, Cognizant) where internal helpdesk operations are a real daily concern. The schema design, SLA policy structure, and business questions mirror how ServiceNow and Jira Service Management operate in practice.
+
+The scatter chart on Page 3 and heatmap on Page 2 are intentionally differentiating choices — they show two-dimensional analysis that goes beyond standard bar and line charts seen in typical fresher projects.
+
+---
 
 ## About
 
-**Author:** Divya Tadi  
-**Project:** Helpdesk Performance & SLA Analytics  
-**Tools:** SQL Server · Power BI · DAX · Python · Pandas · NumPy  
+Built as part of an independent data analytics portfolio to demonstrate end-to-end DA skills — data design, SQL engineering, Power BI dashboard development, and business storytelling.
+
+**Tools:** SQL Server · Power BI · DAX · Python · Pandas · NumPy
+
 **Domain:** IT Operations · Helpdesk Analytics · SLA Management
 
-- GitHub: [https://github.com/DivyaTadi-4218]
-- LinkedIn: [https://www.linkedin.com/in/divya-tadi-b1b453259/]
+**Connect:** [LinkedIn](https://www.linkedin.com/in/pratikshadandriyal) · [GitHub](https://github.com/pratikshadandriyal)
 
-## Acknowledgement
+---
 
-This project was completed independently as part of my data analytics learning and portfolio development.
+## Other Projects
 
-Through this project, I explored helpdesk ticket data, analysed SLA performance using SQL Server, worked with Python for dataset preparation, and developed a Power BI dashboard to present key metrics and business insights.
-
-This independent project helped me strengthen my technical skills, analytical thinking, problem-solving abilities, and understanding of real-world business analytics workflows.
+- [SaaS Product Analytics Dashboard](https://github.com/pratikshadandriyal/SaaS-Product-Analytics-Dashboard) — SQL Server + Power BI + Python, 45,000+ records, churn and feature adoption analysis
+- [AI Job Displacement Dashboard](https://github.com/pratikshadandriyal/AI-Job-Displacement-Reskilling-Dashboard) — Power BI, 13,700+ job records across 9 countries
