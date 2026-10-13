@@ -133,11 +133,19 @@ ________________________________________________________________________________
 How to Run the Project
 
 1. Install Python packages
+
+
 Open a terminal in the project root and run:
+
+
 py -m pip install pandas numpy Faker
 
 2. Generate the CSV files
+
+
 Run:
+
+
 py Python/generate_dataset.py
 
 
