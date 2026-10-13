@@ -53,21 +53,22 @@ The generated CSV files are stored in generated_data/ in my local project setup.
 _____________________________________________________________________________________________________________________________________________________________________________________________
 Project Structure
 
+```text
 Helpdesk-Performance-SLA-Analytics/
-
-├── Data/                
-├── generated_data/    
+├── Data/
+├── generated_data/
 ├── Python/
-│  └── generate_dataset.py
+│   └── generate_dataset.py
 ├── SQL/
-│  └── helpdesk_complete.sql
+│   └── helpdesk_complete.sql
 ├── PowerBI/
-│  └── Helpdesk_Performance_SLA_Analytics.pbix
+│   └── Helpdesk_Performance_SLA_Analytics.pbix
 ├── Screenshots/
-│  ├── Executive Overview.png
-│  ├── SLA & Resolution Deep Dive.png
-│  └── Agent & Department Performance.png
+│   ├── Executive Overview.png
+│   ├── SLA & Resolution Deep Dive.png
+│   └── Agent & Department Performance.png
 └── README.md
+```
 
 ____________________________________________________________________________________________________________________________________________________________________________________________
 Power BI Report
