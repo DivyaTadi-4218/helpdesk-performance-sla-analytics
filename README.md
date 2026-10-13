@@ -190,9 +190,19 @@ ________________________________________________________________________________
 About
 
 Author: Divya Tadi
+
+
+
 Project: Helpdesk Performance & SLA Analytics
+
+
+
 Tools: Python, Pandas, NumPy, SQL Server, SSMS, Power BI, DAX, GitHub
+
+
 Domain: IT Helpdesk Analytics and SLA Monitoring
+
+
 _____________________________________________________________________________________________________________________________________________________________________________________________
 
 Acknowledgement
