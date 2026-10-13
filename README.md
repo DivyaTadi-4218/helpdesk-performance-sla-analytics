@@ -12,11 +12,11 @@ What I Worked On
 - Used SQL Server and SSMS to work with the helpdesk tables and explore ticket and SLA metrics.
 - Worked with the Power BI report and reviewed its three report pages.
 - Updated the project documentation and organised the project files for GitHub.
----------------------------------------- ---------------------------------------____________________________________________________________________________________________________
+____________________________________________________________________________________________________
 
 This repository builds on an existing project structure that I adapted for learning. I am documenting the work I personally performed rather than claiming that every part was created from scratch.
 
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 Project Goal
 The goal is to understand questions such as:
 - How many helpdesk tickets are recorded?
@@ -25,7 +25,7 @@ The goal is to understand questions such as:
 - How many tickets remain open or in progress?
 - How does ticket workload vary by agent and department?
 - Which ticket categories or time periods may need further investigation?
-
+___________________________________________________________________________________________________________________________________________________________________________________________
 
 Tools Used
 
@@ -36,7 +36,7 @@ SQL Server and SSMS	Store, query, and analyse helpdesk data
 Power BI	Explore metrics through report visuals
 DAX	Calculate dashboard measures
 Git and GitHub	Track and share project files
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 
 
 Dataset
@@ -47,7 +47,6 @@ tickets	8,000	Ticket details, status, category, priority, and dates
 agents	20	Support agent information
 departments	8	Department information
 sla_policy	20	SLA thresholds by category and priority
-
 
 The generated CSV files are stored in generated_data/ in my local project setup. Folder names can differ between versions of the project.
 
