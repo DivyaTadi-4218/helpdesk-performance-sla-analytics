@@ -81,7 +81,7 @@ A summary of key helpdesk metrics, including total tickets, SLA breach rate, ave
 
 ![Executive Overview](Screenshots/Executive%20Overview.png)
 
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 
 2. SLA & Resolution Deep Dive
 
@@ -89,6 +89,8 @@ A summary of key helpdesk metrics, including total tickets, SLA breach rate, ave
 A closer look at SLA performance and resolution time across categories and other ticket dimensions.
 
 ![SLA & Resolution Deep Dive](Screenshots/SLA%20%26%20Resolution%20Deep%20Dive.png)
+
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 
 3. Agent & Department Performance
@@ -99,6 +101,8 @@ A comparison of ticket workload across agents and departments.
 ![Agent & Department Performance](Screenshots/Agent%20%26%20Department%20Performance.png)
 
 _____________________________________________________________________________________________________________________________________________________________________________________________
+
+
 Dashboard Metrics
 
 The report previously displayed the following headline values. These values can change after data regeneration, refreshes, or filter changes, so they should be rechecked in Power BI before being presented as final results.
@@ -151,7 +155,7 @@ What I Learned
 - How SLA measures can be used to study support performance.
 - How a multi-page Power BI report can present operational metrics.
 - Why KPI definitions and filters must be checked before interpreting results.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 Next Improvements
 
@@ -159,14 +163,14 @@ Next Improvements
 - Document the exact DAX measures and verify each KPI definition.
 - Validate the report after refreshing it from my local SQL Server.
 - Add a short section explaining the changes I made to the original project files.
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 About
 
 Author: Divya Tadi
 Project: Helpdesk Performance & SLA Analytics
 Tools: Python, Pandas, NumPy, SQL Server, SSMS, Power BI, DAX, GitHub
 Domain: IT Helpdesk Analytics and SLA Monitoring
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 Acknowledgement
 
