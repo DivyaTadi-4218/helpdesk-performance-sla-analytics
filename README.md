@@ -1,10 +1,10 @@
-##Helpdesk Performance & SLA Analytics
+Helpdesk Performance & SLA Analytics
 
 A data analytics portfolio project by Divya Tadi
 I worked on this project to practise how Python, SQL Server, and Power BI can be used together to analyse IT helpdesk tickets. I explored ticket volume, SLA breaches, resolution time, agent workload, and department-wise demand using a simulated dataset.
 
 Dataset note: The data is simulated for learning and portfolio practice. The findings do not represent a real company.
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 What I Worked On
 
 - Reviewed and modified the Python dataset-generation script so its CSV output path works with my local project folders.
@@ -50,7 +50,7 @@ sla_policy	20	SLA thresholds by category and priority
 
 The generated CSV files are stored in generated_data/ in my local project setup. Folder names can differ between versions of the project.
 
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 Project Structure
 
 Helpdesk-Performance-SLA-Analytics/
@@ -69,29 +69,36 @@ Helpdesk-Performance-SLA-Analytics/
 │   └── Agent & Department Performance.png
 └── README.md
 
-
+____________________________________________________________________________________________________________________________________________________________________________________________
 Power BI Report
 
 The report contains three pages:
 
 1. Executive Overview
+
+
 A summary of key helpdesk metrics, including total tickets, SLA breach rate, average resolution time, open backlog, first-call resolution (FCR), and critical tickets.
 
 ![Executive Overview](Screenshots/Executive%20Overview.png)
 
 
+
 2. SLA & Resolution Deep Dive
+
+
 A closer look at SLA performance and resolution time across categories and other ticket dimensions.
 
 ![SLA & Resolution Deep Dive](Screenshots/SLA%20%26%20Resolution%20Deep%20Dive.png)
 
 
 3. Agent & Department Performance
+
+
 A comparison of ticket workload across agents and departments.
 
 ![Agent & Department Performance](Screenshots/Agent%20%26%20Department%20Performance.png)
 
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 Dashboard Metrics
 
 The report previously displayed the following headline values. These values can change after data regeneration, refreshes, or filter changes, so they should be rechecked in Power BI before being presented as final results.
@@ -104,19 +111,19 @@ Open Backlog	                1,177
 First-Call Resolution (FCR)	    95.34%
 Critical Tickets	             603
 
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 How to Run the Project
 
 1. Install Python packages
 Open a terminal in the project root and run:
 py -m pip install pandas numpy Faker
 2. Generate the CSV files
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 Run:
 py Python/generate_dataset.py
 Check the script's output path and confirm the CSV files were created in the expected folder. Running the script again may replace existing generated CSV files, so keep a backup if you need the current data.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 3. Set up SQL Server
 
@@ -126,6 +133,7 @@ Check the script's output path and confirm the CSV files were created in the exp
 4. Open SQL/helpdesk_complete.sql and run it section by section after reviewing which tables or views already exist. 
 Avoid blindly rerunning database-creation statements.
 
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 4. Open Power BI
 
@@ -133,7 +141,7 @@ Avoid blindly rerunning database-creation statements.
 2. If prompted, update the data source to your local SQL Server instance.
 3. Refresh the report.
 4. Check that the visuals and KPI values match the data and measure definitions.
-
+_____________________________________________________________________________________________________________________________________________________________________________________________
 
 What I Learned
 
