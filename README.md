@@ -55,8 +55,8 @@ Project Structure
 
 Helpdesk-Performance-SLA-Analytics/
 
-├── Data/                 # CSV data, if present in this version
-├── generated_data/       # Generated CSV output
+├── Data/                
+├── generated_data/    
 ├── Python/
 │   └── generate_dataset.py
 ├── SQL/
