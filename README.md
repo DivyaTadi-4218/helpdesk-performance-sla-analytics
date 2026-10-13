@@ -58,15 +58,15 @@ Helpdesk-Performance-SLA-Analytics/
 ├── Data/                
 ├── generated_data/    
 ├── Python/
-│   └── generate_dataset.py
+│  └── generate_dataset.py
 ├── SQL/
-│   └── helpdesk_complete.sql
+│  └── helpdesk_complete.sql
 ├── PowerBI/
-│   └── Helpdesk_Performance_SLA_Analytics.pbix
+│  └── Helpdesk_Performance_SLA_Analytics.pbix
 ├── Screenshots/
-│   ├── Executive Overview.png
-│   ├── SLA & Resolution Deep Dive.png
-│   └── Agent & Department Performance.png
+│  ├── Executive Overview.png
+│  ├── SLA & Resolution Deep Dive.png
+│  └── Agent & Department Performance.png
 └── README.md
 
 ____________________________________________________________________________________________________________________________________________________________________________________________
