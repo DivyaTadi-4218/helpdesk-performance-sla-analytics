@@ -1,10 +1,13 @@
 Helpdesk Performance & SLA Analytics
-
 A data analytics portfolio project by Divya Tadi
+
+
 I worked on this project to practise how Python, SQL Server, and Power BI can be used together to analyse IT helpdesk tickets. I explored ticket volume, SLA breaches, resolution time, agent workload, and department-wise demand using a simulated dataset.
 
 Dataset note: The data is simulated for learning and portfolio practice. The findings do not represent a real company.
+
 ____________________________________________________________________________________________________________________________________________________________________________________________
+
 What I Worked On
 
 - Reviewed and modified the Python dataset-generation script so its CSV output path works with my local project folders.
@@ -18,6 +21,7 @@ This repository builds on an existing project structure that I adapted for learn
 
 ____________________________________________________________________________________________________________________________________________________________________________________________
 Project Goal
+
 The goal is to understand questions such as:
 - How many helpdesk tickets are recorded?
 - What percentage of eligible tickets breach their SLA?
@@ -29,24 +33,29 @@ ________________________________________________________________________________
 
 Tools Used
 
-Tool	How it is used in this project
-Python	Generate the simulated dataset
-Pandas and NumPy	Prepare and export tabular data
-SQL Server and SSMS	Store, query, and analyse helpdesk data
-Power BI	Explore metrics through report visuals
-DAX	Calculate dashboard measures
-Git and GitHub	Track and share project files
+| Tool | How it is used in this project |
+|---|---|
+| Python | Generate the simulated dataset |
+| Pandas and NumPy | Prepare and export tabular data |
+| SQL Server and SSMS | Store, query, and analyse helpdesk data |
+| Power BI | Explore metrics through report visuals |
+| DAX | Calculate dashboard measures |
+| Git and GitHub | Track and share project files |                                              Track and share project files
 ____________________________________________________________________________________________________________________________________________________________________________________________
 
 
 Dataset
-
 The project uses simulated data across four main tables:
-Table	Approximate row count	Purpose
-tickets	8,000	Ticket details, status, category, priority, and dates
-agents	20	Support agent information
-departments	8	Department information
-sla_policy	20	SLA thresholds by category and priority
+
+
+| Table | Approximate row count | Purpose |
+|---|---:|---|
+| `tickets` | 8,000 | Ticket details, status, category, priority, and dates |
+| `agents` | 20 | Support agent information |
+| `departments` | 8 | Department information |
+| `sla_policy` | 20 | SLA thresholds by category and priority |
+
+
 
 The generated CSV files are stored in generated_data/ in my local project setup. Folder names can differ between versions of the project.
 
