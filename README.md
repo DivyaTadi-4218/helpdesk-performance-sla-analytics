@@ -1,4 +1,4 @@
-Helpdesk Performance & SLA Analytics
+##Helpdesk Performance & SLA Analytics
 
 A data analytics portfolio project by Divya Tadi
 I worked on this project to practise how Python, SQL Server, and Power BI can be used together to analyse IT helpdesk tickets. I explored ticket volume, SLA breaches, resolution time, agent workload, and department-wise demand using a simulated dataset.
@@ -12,7 +12,7 @@ What I Worked On
 - Used SQL Server and SSMS to work with the helpdesk tables and explore ticket and SLA metrics.
 - Worked with the Power BI report and reviewed its three report pages.
 - Updated the project documentation and organised the project files for GitHub.
-
+---------------------------------------- ---------------------------------------____________________________________________________________________________________________________
 
 This repository builds on an existing project structure that I adapted for learning. I am documenting the work I personally performed rather than claiming that every part was created from scratch.
 
@@ -55,6 +55,7 @@ The generated CSV files are stored in generated_data/ in my local project setup.
 Project Structure
 
 Helpdesk-Performance-SLA-Analytics/
+
 ├── Data/                 # CSV data, if present in this version
 ├── generated_data/       # Generated CSV output
 ├── Python/
