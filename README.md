@@ -1,4 +1,7 @@
 Helpdesk Performance & SLA Analytics
+
+
+
 A data analytics portfolio project by Divya Tadi
 
 
@@ -117,13 +120,14 @@ Dashboard Metrics
 
 The report previously displayed the following headline values. These values can change after data regeneration, refreshes, or filter changes, so they should be rechecked in Power BI before being presented as final results.
 
-Metric	                    Displayed value
-Total Tickets	                8,000
-SLA Breach Rate	                23.49%
-Average Resolution Time	       29.3 hours
-Open Backlog	                1,177
-First-Call Resolution (FCR)	    95.34%
-Critical Tickets	             603
+| Metric | Displayed value |
+|---|---:|
+| Total Tickets | 8,000 |
+| SLA Breach Rate | 23.49% |
+| Average Resolution Time | 29.3 hours |
+| Open Backlog | 1,177 |
+| First-Call Resolution (FCR) | 95.34% |
+| Critical Tickets | 603 |
 
 _____________________________________________________________________________________________________________________________________________________________________________________________
 How to Run the Project
@@ -131,12 +135,14 @@ How to Run the Project
 1. Install Python packages
 Open a terminal in the project root and run:
 py -m pip install pandas numpy Faker
-2. Generate the CSV files
-_____________________________________________________________________________________________________________________________________________________________________________________________
 
+2. Generate the CSV files
 Run:
 py Python/generate_dataset.py
+
+
 Check the script's output path and confirm the CSV files were created in the expected folder. Running the script again may replace existing generated CSV files, so keep a backup if you need the current data.
+
 _____________________________________________________________________________________________________________________________________________________________________________________________
 
 3. Set up SQL Server
@@ -144,8 +150,7 @@ ________________________________________________________________________________
 1. Open SQL Server Management Studio (SSMS) and connect to your local SQL Server instance.
 2. Create or select the HelpdeskAnalytics database.
 3. Import the CSV files into the matching tables, checking the column names and data types.
-4. Open SQL/helpdesk_complete.sql and run it section by section after reviewing which tables or views already exist. 
-Avoid blindly rerunning database-creation statements.
+4. Open SQL/helpdesk_complete.sql and run it section by section after reviewing which tables or views already exist. Avoid blindly rerunning database-creation statements.
 
 _____________________________________________________________________________________________________________________________________________________________________________________________
 
